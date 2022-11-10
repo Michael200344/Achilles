@@ -6,19 +6,19 @@ W, H = 1200, 600
 GROUND_LEVEL = 480
 win = pygame.display.set_mode((W, H))
 
-bgOrig = pygame.image.load("bg.png").convert()
+bgOrig = pygame.image.load(os.path.join("Assets", "bg.png")).convert()
 bg = pygame.transform.scale(bgOrig, (W, H))
 bgx = bg.get_width()
 
 pygame.display.set_caption("Practice with Character Movement")
 
-bg_music = pygame.mixer.music.load("music1.mp3")
+bg_music = pygame.mixer.music.load(os.path.join("Assets", "Sounds", "music1.mp3"))
 #pygame.mixer.music.play(-1)
 
-jump_land_sound = pygame.mixer.Sound("jumpland.wav")
-jump_sound = pygame.mixer.Sound("jump.wav")
-sword_whoosh_sound = pygame.mixer.Sound("sword_whoosh.mp3")
-running_sound = pygame.mixer.Sound("run.wav")
+jump_land_sound = pygame.mixer.Sound(os.path.join("Assets", "Sounds", "jumpland.wav"))
+jump_sound = pygame.mixer.Sound(os.path.join("Assets", "Sounds", "jump.wav"))
+sword_whoosh_sound = pygame.mixer.Sound(os.path.join("Assets", "Sounds", "sword_whoosh.mp3"))
+running_sound = pygame.mixer.Sound(os.path.join("Assets", "Sounds", "run.wav"))
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self):
@@ -29,13 +29,13 @@ class Ground(pygame.sprite.Sprite):
         self.rect = pygame.rect.Rect(0, GROUND_LEVEL, self.width, self.height)
 
 class Player(pygame.sprite.Sprite):
-    run = [pygame.transform.scale(pygame.image.load(os.path.join('Walk', 'GreekBasic_Walk_' + str(x) + '.png')), 
+    run = [pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Animations", 'Walk', 'GreekBasic_Walk_' + str(x) + '.png')), 
     (200, 200)) for x in range(0,11)]
-    idle = [pygame.transform.scale(pygame.image.load(os.path.join('Idle', 'GreekBasic_Idle_0' + str(x) + '.png')), 
+    idle = [pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Animations", 'Idle', 'GreekBasic_Idle_0' + str(x) + '.png')), 
     (160, 200)) for x in range(0,17)]
-    attack = [pygame.transform.scale(pygame.image.load(os.path.join('Attack', 'GreekBasic_Attack_' + str(x) + '.png')), 
+    attack = [pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Animations", 'Attack', 'GreekBasic_Attack_' + str(x) + '.png')), 
     (450, 210)) for x in range(0,7)]
-    jump = [pygame.transform.scale(pygame.image.load(os.path.join('Jump', 'GreekBasic_Jump-Start_0' + str(x) + '.png')), 
+    jump = [pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Animations", 'Jump', 'GreekBasic_Jump-Start_0' + str(x) + '.png')), 
     (220, 240)) for x in range(0,18)]
     
     def __init__(self, x, y):
