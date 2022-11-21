@@ -31,6 +31,7 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
         self.jumpCount = 0
         self.health = 10
+        self.score = 0
 
     def draw(self, win):
         if self.attacking:

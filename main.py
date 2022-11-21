@@ -48,7 +48,12 @@ def redrawWindow():
     font = pygame.font.Font('freesansbold.ttf', 32)
     text = font.render('Health: ' + str(player.health), True, (0, 0, 0))
     textRect = text.get_rect()
+    textRect.center = (textRect.width - 70, textRect.height - 10)
+    scoreText = font.render('Score: ' + str(player.score), True, (0, 0, 0), )
+    scoreRect = scoreText.get_rect()
+    scoreRect.center = (W - scoreRect.width + 50, scoreRect.height - 10)
     win.blit(text, textRect)
+    win.blit(scoreText, scoreRect)
     pygame.display.flip()
 
 def main(): # Main game loop
@@ -56,6 +61,7 @@ def main(): # Main game loop
     clock = pygame.time.Clock()
     clock.tick(FPS)
     running = True
+    
     while running:
         redrawWindow()
         for event in pygame.event.get():
@@ -86,6 +92,8 @@ def main(): # Main game loop
             en.move(0.22)
         if pygame.sprite.spritecollideany(player, enemies):
             if player.attacking:
+                if not(en.dead):
+                    player.score += 1
                 en.dead = True
                 pass
             if not(en.dead):
