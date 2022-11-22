@@ -11,3 +11,4 @@ To install this, just clone the repo locally or install files and run locally on
 - Add some more attibutes to the main menu so that the user can select game difficulty.
 - If the user gets the winning score, play an audio file, change the display on the screen and finally end the game to show that user has won.
 - Allow the player to walk to the left and to move right while jumping.
+- Add death grunts for enemies once they are killed.
