@@ -14,6 +14,8 @@ class Player(pygame.sprite.Sprite):
     (450, 210)) for x in range(0,7)]
     jump = [pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Animations", 'Jump', 'GreekBasic_Jump-Start_0' + str(x) + '.png')), 
     (220, 240)) for x in range(0,18)]
+    die = [pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'Animations', 'Die', 'GreekBasic_Die_0' + str(x) + '.png')), 
+    (300, 300)) for x in range(0,11)]
     
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -32,9 +34,14 @@ class Player(pygame.sprite.Sprite):
         self.jumpCount = 0
         self.health = 10
         self.score = 0
+        self.dead = False
+        self.deadCount = 0
 
     def draw(self, win):
-        if self.attacking:
+        if self.dead:
+            win.blit(self.die[self.deadCount//70], (self.x - 120 ,self.y))
+            self.deadCount += 1
+        elif self.attacking:
             if self.attackCount > 80 and self.attackCount < 120:
                 self.rect = pygame.rect.Rect(self.x, self.y, self.width + 50, self.height)
             if self.attackCount + 1 >= 140:

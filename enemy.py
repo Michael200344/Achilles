@@ -22,9 +22,7 @@ class Enemy(pygame.sprite.Sprite):
         self.width = 130
         self.height = 180
         self.runCount = 0
-        self.running = False
-        self.isIdle = True
-        self.idleCount = 0
+        self.running = True
         self.attackCount = 0
         self.attacking = False
         self.rect = pygame.rect.Rect(self.x, self.y, self.width, self.height)
@@ -41,22 +39,14 @@ class Enemy(pygame.sprite.Sprite):
         #     self.attackCount += 1
         if self.dead:
             self.running = False
-            self.idle = False
             if self.deadCount + 1 < 135:
                 win.blit(self.death[self.deadCount//15], (self.x,self.y + 10))
-                self.deadCount += 1  
+                self.deadCount += 1
         elif self.running:
             if self.runCount + 1 >= 330:
                 self.runCount = 0
             win.blit(self.run[self.runCount//30], (self.x,self.y))
             self.runCount += 1
-            #pygame.mixer.Sound.play(running_sound)
-            self.running = False
-        elif self.isIdle:
-            if self.idleCount + 1 >= 680:
-                self.idleCount = 0
-            win.blit(self.idle[self.idleCount//40], (self.x,self.y))
-            self.idleCount += 1
 
     def move(self, val):
         self.x -= val
