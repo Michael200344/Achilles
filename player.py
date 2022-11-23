@@ -32,10 +32,11 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.rect.Rect(self.x - 20, self.y, self.width, self.height)
         self.jumping = False
         self.jumpCount = 0
-        self.health = 10
+        self.health = 3
         self.score = 0
         self.dead = False
         self.deadCount = 0
+        self.speed = 0.9
 
     def draw(self, win):
         if self.dead:
@@ -93,4 +94,4 @@ class Player(pygame.sprite.Sprite):
 
     def gravity(self):
         if self.jumping:
-            self.move(0, -(self.jumpCount**2) * .0000028)
+            self.move(0, -(self.y**2) * .0000099)
