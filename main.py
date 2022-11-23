@@ -13,7 +13,8 @@ GROUND_LEVEL = 480
 win = pygame.display.set_mode((W, H))
 
 menu_font = pygame.font.Font("\Windows\Fonts\papyrus.ttf", 100)
-menu_f2 = pygame.font.Font("\Windows\Fonts\papyrus.ttf", 20)
+menu_f2 = pygame.font.Font("\Windows\Fonts\georgia.ttf", 23)
+menu_f3 = pygame.font.Font("\Windows\Fonts\georgia.ttf", 15)
 menu_bg_orig = pygame.image.load(os.path.join("Assets", "menu_bg.jpg")).convert()
 menu_bg = pygame.transform.scale(menu_bg_orig, (W, H))
 
@@ -64,13 +65,18 @@ def drawMenu():
     win.blit(menu_bg, (0, 0))
     menu_text = menu_font.render('ACHILLES',  True, (255, 255, 255))
     menu_rect = menu_text.get_rect()
-    menu_rect.center = (W / 2, H / 2)
+    menu_rect.center = (W / 2 - menu_rect.left, H / 2)
     win.blit(menu_text, menu_rect)
     
-    t2 = menu_f2.render('BY: MICHAEL RHEINTGEN',  True, (255, 255, 255))
+    t2 = menu_f2.render('THE GREATEST WARRIOR',  True, (255, 255, 255))
     t2_rect = t2.get_rect()
-    t2_rect.center = (W / 2, H / 2 + 100)
+    t2_rect.center = (W/2 - t2_rect.left, H / 2 + 80)
     win.blit(t2, t2_rect)
+
+    # t3 = menu_f3.render("PRESS  SPACE TO START", True, (255, 255, 255))
+    # t3_rect = t3.get_rect()
+    # t3_rect.center = (W/2 - t3_rect.left, H/2 + 200)
+    # win.blit(t3, t3_rect)
     pygame.display.flip()
 
 def checkColision(en):
@@ -84,7 +90,7 @@ def checkColision(en):
             return True
 
 def main(): # Main game loop
-    FPS = 60
+    FPS = 30
     clock = pygame.time.Clock()
     clock.tick(FPS)
     running = True
@@ -92,39 +98,25 @@ def main(): # Main game loop
     music_playing = False
     enemy_speed = 0.25
     while running:
-        if menu:
-            drawMenu()
-            if not(music_playing):
-                pygame.mixer.music.play(-1)
-                music_playing = True
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                running = False
-            elif event.type == pygame.KEYDOWN:
-                menu = False
-            
         keys_pressed = pygame.key.get_pressed()
-
         if not(menu):
-            if pygame.time.get_ticks() % 1200 == 0 and enemy_speed < 1.3:
+            if pygame.time.get_ticks() % 1200 == 0 and enemy_speed < 1:
                 enemy_speed += 0.05
             redrawWindow()
             if keys_pressed[pygame.K_SPACE]:
                 if not(player.jumping):
                     player.attacking = True
             elif keys_pressed[pygame.K_LEFT]:
-                player.move(-0.5, 0)
+                player.running = True
+                player.move(-player.speed, 0)
             elif keys_pressed[pygame.K_UP] and player.y == GROUND_LEVEL - 180:
                 player.jumping = True
             elif keys_pressed[pygame.K_RIGHT]:
-                if player.attacking or player.jumping:
+                if player.attacking:
                     player.running = False
                 else:
                     player.running = True
-                    player.move(0.5, 0)
+                    player.move(player.speed, 0)
             else:
                 player.isIdle = True
 
@@ -143,5 +135,21 @@ def main(): # Main game loop
                 pygame.mixer.Sound.play(death_sound)
             if player.deadCount > 700:
                 running = False
+        
+        if menu:
+            drawMenu()
+            if not(music_playing):
+                pygame.mixer.music.play(-1)
+                music_playing = True
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                menu = False
+
+        
 main() # Run the program
     
