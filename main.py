@@ -109,7 +109,7 @@ def main(): # Main game loop
         keys_pressed = pygame.key.get_pressed()
 
         if not(menu):
-            if pygame.time.get_ticks() % 1200 == 0:
+            if pygame.time.get_ticks() % 1200 == 0 and enemy_speed < 1.3:
                 enemy_speed += 0.05
             redrawWindow()
             if keys_pressed[pygame.K_SPACE]:
@@ -132,7 +132,8 @@ def main(): # Main game loop
                 for en in enemies:
                     checkColision(en)
                     if en.deadCount > 130:
-                        enemies.add(Enemy(W + 50, GROUND_LEVEL - 180))
+                        randDist = random.randint(0, 200)
+                        enemies.add(Enemy(W + randDist, GROUND_LEVEL - 180))
                         en.kill()
                         break
                     elif not(en.dead):
