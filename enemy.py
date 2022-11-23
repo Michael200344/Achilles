@@ -39,9 +39,11 @@ class Enemy(pygame.sprite.Sprite):
         #     self.attackCount += 1
         if self.dead:
             self.running = False
+            pygame.mixer.Sound.play(enemy_death_sound)
             if self.deadCount + 1 < 135:
                 win.blit(self.death[self.deadCount//15], (self.x,self.y + 10))
                 self.deadCount += 1
+                
         elif self.running:
             if self.runCount + 1 >= 330:
                 self.runCount = 0
