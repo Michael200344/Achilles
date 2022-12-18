@@ -3,6 +3,8 @@ CLCV 115 Final project
 
 This game was created using the pygame tech stack. It follows the greatest warrior ever, Achilles, as he battles in the trojan war.
 
+I created a corresponding essay that goes along with this game that explains my inspiration for creating the game and why certain features were implemented. The essay is linked here: file:///C:/Users/micha/Downloads/Final%20Project%20Essay.pdf
+
 # Install the game
 
 In order to install the game, first you must clone this repository to your local device through the use of a command prompt in an IDE using the command:
