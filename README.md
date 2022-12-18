@@ -3,7 +3,19 @@ CLCV 115 Final project
 
 This game was created using the pygame tech stack. It follows the greatest warrior ever, Achilles, as he battles in the trojan war.
 
-To install this, just clone the repo locally or install files and run locally on your local IDE
+# Install the game
+
+In order to install the game, first you must clone this repository to your local device through the use of a command prompt in an IDE using the command:
+'''
+git clone https://github.com/Michael200344/Achilles.git
+'''
+Once you have cloned the repository, you need to open the terminal in your IDE of choice and run the main game file. To do this, simply enter into the terminal:
+'''
+py main.py
+'''
+If you get an error at this point in time, it is likely because you do not have python or pygame installed on your local device. In order to install it, follow the steps on the link below and then try the previous step again.
+
+https://www.pygame.org/wiki/GettingStarted
 
 # Goals
 - Add different modes: easy, medium, hard, impossible. Then adjust player health, enemy speed, enemy damage and winning score accordingly.
